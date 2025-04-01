@@ -77,19 +77,18 @@
 
       // Add the Search widget to the top-right of the map
       view.ui.add(searchWidget, {
-        position: "bottom-right"
+        position: "top-right" // Move the search bar to the top-right
       });
 
-        // Add Locate widget (GPS)
-        const locateWidget = new Locate({
-          view: view
-        });
-        // Add the Locate widget to the top-left of the map
-        view.ui.add(locateWidget, {
-          position: "top-left"
-        });
+      // Add Locate widget (GPS)
+      const locateWidget = new Locate({
+        view: view
+      });
 
-
+      // Add the Locate widget to the bottom-right of the map
+      view.ui.add(locateWidget, {
+        position: "top-left" // Move the locate widget to the bottom-right
+      });
 
     //Create featurelayer from the feature service WILDFIRES
     const layer = new FeatureLayer({
@@ -132,6 +131,16 @@
 });
 
 
+  </script>
+
+  <script>
+    // Remove the "Add Record" button if it exists
+    document.addEventListener("DOMContentLoaded", function() {
+      const addRecordButton = document.querySelector(".addRecordBtn");
+      if (addRecordButton) {
+        addRecordButton.remove();
+      }
+    });
   </script>
 </body>
 </html>
