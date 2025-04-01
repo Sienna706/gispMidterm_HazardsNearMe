@@ -31,9 +31,12 @@
     .addRecordBtn:hover {
         background-color: #005a87;
     }
-  </style>
 
-  
+    /* Custom style for the legend widget */
+    .esri-legend {
+      width: 200px !important; /* Adjust the width as needed */
+    }
+  </style>
 
   <!-- Load ArcGIS API -->
   <link rel="stylesheet" href="https://js.arcgis.com/4.26/esri/themes/light/main.css" />
@@ -51,8 +54,9 @@
       "esri/views/MapView",
       "esri/widgets/Search",
       "esri/widgets/Locate",
+      "esri/widgets/Legend", // Add Legend widget
       "esri/layers/FeatureLayer",
-    ], function(esriConfig, Map, MapView, Search, Locate, FeatureLayer) {
+    ], function(esriConfig, Map, MapView, Search, Locate, Legend, FeatureLayer) {
       
       // Set API Key for ArcGIS
       esriConfig.apiKey = "AAPTxy8BH1VEsoebNVZXo8HurNAUgv3aeRUmzJ4ckMevLQLfVJhdc-z1-a5rmBvbZM6HiAtWhTkHR1uPqL3lwJdP49LWHB6rjySi-OGZeNP1ea6oiztHSf22dFyO6r4o94L1an9zLTOBsN3vlqSz7k8MyUO9e1udJ3zNViSQ518xOFVwCnGBfyh40rSb4E2X3zsumGVzsUowRjXGPUi8Odwr1Y9iVZinjPQa-7TSBIuR8E4.AT1_EtHHMprs"; // Replace with your actual API key
@@ -77,7 +81,7 @@
 
       // Add the Search widget to the top-right of the map
       view.ui.add(searchWidget, {
-        position: "top-right" // Move the search bar to the top-right
+        position: "top-right"
       });
 
       // Add Locate widget (GPS)
@@ -87,50 +91,50 @@
 
       // Add the Locate widget to the bottom-right of the map
       view.ui.add(locateWidget, {
-        position: "top-left" // Move the locate widget to the bottom-right
+        position: "top-left"
       });
 
-    //Create featurelayer from the feature service WILDFIRES
-    const layer = new FeatureLayer({
+      // Create feature layers
+      const layer1 = new FeatureLayer({
         url: "https://services9.arcgis.com/RHVPKKiFTONKtxq3/arcgis/rest/services/USA_Wildfires_v1/FeatureServer",
-    });
-    // Add the feature layer to the map
-        map.add(layer);
+      });
+      map.add(layer1);
 
-
-    //Create featurelayer from the feature service HURRICANES
-    const layer2 = new FeatureLayer({
+      const layer2 = new FeatureLayer({
         url: "https://services9.arcgis.com/RHVPKKiFTONKtxq3/arcgis/rest/services/Active_Hurricanes_v1/FeatureServer",
-    });
-    // Add the feature layer to the map
-        map.add(layer2);
+      });
+      map.add(layer2);
 
-
-    //Create featurelayer from the feature service STORM REPORTS
-    const layer3 = new FeatureLayer({
+      const layer3 = new FeatureLayer({
         url: "https://services9.arcgis.com/RHVPKKiFTONKtxq3/arcgis/rest/services/NOAA_storm_reports_v1/FeatureServer",
-    });
-    // Add the feature layer to the map
-        map.add(layer3);
-    
+      });
+      map.add(layer3);
 
-    //Create featurelayer from the feature service VOLCANOS 
-    const layer4 = new FeatureLayer({
+      const layer4 = new FeatureLayer({
         url: "https://services9.arcgis.com/RHVPKKiFTONKtxq3/arcgis/rest/services/Monitored_Global_USGS_Volcanos/FeatureServer",
-    });
-    // Add the feature layer to the map
-        map.add(layer4);
-    
-        
-    //Create featurelayer from the feature service EARTHQUAKES
-    const layer5 = new FeatureLayer({
+      });
+      map.add(layer4);
+
+      const layer5 = new FeatureLayer({
         url: "https://services9.arcgis.com/RHVPKKiFTONKtxq3/arcgis/rest/services/Earthquakes_v1/FeatureServer",
+      });
+      map.add(layer5);
+
+      // Add Legend widget
+      const legend = new Legend({
+        view: view,
+        layerInfos: [
+          { layer: layer1, title: "Wildfires" },
+          { layer: layer2, title: "Hurricanes" },
+          { layer: layer3, title: "Storm Reports" },
+          { layer: layer4, title: "Volcanos" },
+          { layer: layer5, title: "Earthquakes" }
+        ]
+      });
+
+      // Add the Legend widget to the bottom-left of the map
+      view.ui.add(legend, "bottom-left");
     });
-    // Add the feature layer to the map
-        map.add(layer5);
-});
-
-
   </script>
 
   <script>
