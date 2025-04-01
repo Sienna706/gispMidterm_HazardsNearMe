@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
 
-  <title>Data Collector for AGOL!</title>
+  <title>HazardsNearMe</title>
 
   <style>
     html, body, #viewDiv {
@@ -54,7 +54,7 @@
       "esri/views/MapView",
       "esri/widgets/Search",
       "esri/widgets/Locate",
-      "esri/widgets/Legend", // Add Legend widget
+      "esri/widgets/Legend", 
       "esri/layers/FeatureLayer",
     ], function(esriConfig, Map, MapView, Search, Locate, Legend, FeatureLayer) {
       
@@ -71,7 +71,7 @@
         container: "viewDiv",
         map: map,
         center: [-98.5795, 39.8283], // Center of the contiguous United States
-        zoom: 4 // Adjusted zoom level for a broader view of the US
+        zoom: 3.8 // Adjusted zoom level for a broader view of the US
       });
 
       // Add Search widget (Address Bar)
@@ -89,36 +89,31 @@
         view: view
       });
 
-      // Add the Locate widget to the bottom-right of the map
+      // Add the Locate widget to the top left of the map
       view.ui.add(locateWidget, {
         position: "top-left"
       });
 
       // Create feature layers
-      const layer1 = new FeatureLayer({
+      const layer1 = new FeatureLayer({ // Wildfires
         url: "https://services9.arcgis.com/RHVPKKiFTONKtxq3/arcgis/rest/services/USA_Wildfires_v1/FeatureServer",
       });
       map.add(layer1);
 
-      const layer2 = new FeatureLayer({
+      const layer2 = new FeatureLayer({ //Hurricanes
         url: "https://services9.arcgis.com/RHVPKKiFTONKtxq3/arcgis/rest/services/Active_Hurricanes_v1/FeatureServer",
       });
       map.add(layer2);
 
-      const layer3 = new FeatureLayer({
-        url: "https://services9.arcgis.com/RHVPKKiFTONKtxq3/arcgis/rest/services/NOAA_storm_reports_v1/FeatureServer",
+      const layer3 = new FeatureLayer({ //All Storm Reports
+        url: "https://services9.arcgis.com/RHVPKKiFTONKtxq3/ArcGIS/rest/services/NOAA_storm_reports_v1/FeatureServer/4",
       });
       map.add(layer3);
 
-      const layer4 = new FeatureLayer({
+      const layer4 = new FeatureLayer({ //Volcanos
         url: "https://services9.arcgis.com/RHVPKKiFTONKtxq3/arcgis/rest/services/Monitored_Global_USGS_Volcanos/FeatureServer",
       });
       map.add(layer4);
-
-      const layer5 = new FeatureLayer({
-        url: "https://services9.arcgis.com/RHVPKKiFTONKtxq3/arcgis/rest/services/Earthquakes_v1/FeatureServer",
-      });
-      map.add(layer5);
 
       // Add Legend widget
       const legend = new Legend({
@@ -126,9 +121,8 @@
         layerInfos: [
           { layer: layer1, title: "Wildfires" },
           { layer: layer2, title: "Hurricanes" },
-          { layer: layer3, title: "Storm Reports" },
-          { layer: layer4, title: "Volcanos" },
-          { layer: layer5, title: "Earthquakes" }
+          { layer: layer3, title: "All Storm Reports" },
+          { layer: layer4, title: "Volcanos" }
         ]
       });
 
