@@ -90,13 +90,48 @@
           position: "top-left"
         });
 
-    //Create featurelayer from the feature service 
+
+
+    //Create featurelayer from the feature service WILDFIRES
     const layer = new FeatureLayer({
-        url: "https://services.arcgis.com/LBbVDC0hKPAnLRpO/arcgis/rest/services/survey123_cce9adf219b94c6aadfdad6e75ea08e0_results/FeatureServer",
+        url: "https://services9.arcgis.com/RHVPKKiFTONKtxq3/arcgis/rest/services/USA_Wildfires_v1/FeatureServer",
     });
     // Add the feature layer to the map
         map.add(layer);
+
+
+    //Create featurelayer from the feature service HURRICANES
+    const layer2 = new FeatureLayer({
+        url: "https://services9.arcgis.com/RHVPKKiFTONKtxq3/arcgis/rest/services/Active_Hurricanes_v1/FeatureServer",
     });
+    // Add the feature layer to the map
+        map.add(layer2);
+
+
+    //Create featurelayer from the feature service STORM REPORTS
+    const layer3 = new FeatureLayer({
+        url: "https://services9.arcgis.com/RHVPKKiFTONKtxq3/arcgis/rest/services/NOAA_storm_reports_v1/FeatureServer",
+    });
+    // Add the feature layer to the map
+        map.add(layer3);
+    
+
+    //Create featurelayer from the feature service VOLCANOS 
+    const layer4 = new FeatureLayer({
+        url: "https://services9.arcgis.com/RHVPKKiFTONKtxq3/arcgis/rest/services/Monitored_Global_USGS_Volcanos/FeatureServer",
+    });
+    // Add the feature layer to the map
+        map.add(layer4);
+    
+        
+    //Create featurelayer from the feature service EARTHQUAKES
+    const layer5 = new FeatureLayer({
+        url: "https://services9.arcgis.com/RHVPKKiFTONKtxq3/arcgis/rest/services/Earthquakes_v1/FeatureServer",
+    });
+    // Add the feature layer to the map
+        map.add(layer5);
+});
+
 
   </script>
 </body>
